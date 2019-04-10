@@ -123,7 +123,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="application.cpp" />
+    <ClCompile Include="draw_shape.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="raster_graphics.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="application.h" />
+    <ClInclude Include="draw_shape.h" />
+    <ClInclude Include="globals.h" />
+    <ClInclude Include="raster_graphics.h" />
+    <ClInclude Include="utility.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
