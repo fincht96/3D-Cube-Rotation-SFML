@@ -24,24 +24,12 @@
     <ClCompile Include="raster_graphics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="draw_shape.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="raster_graphics.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="globals.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="utility.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="draw_shape.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
