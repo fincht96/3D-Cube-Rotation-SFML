@@ -3,7 +3,7 @@
 
 
 
-void Application::MultiplyMatrixVector(vec3d &i, vec3d &o, Mat4x4 &m)
+void Application::MultiplyMatrixVector(const vec3d &i, vec3d &o, Mat4x4 &m)
 {
 	o.x = i.x * m.m[0][0] + i.y * m.m[1][0] + i.z * m.m[2][0] + m.m[3][0];
 	o.y = i.x * m.m[0][1] + i.y * m.m[1][1] + i.z * m.m[2][1] + m.m[3][1];
@@ -82,10 +82,38 @@ void Application::init(sf::Vector2u windowSize, std::string windowTitle)
 
 void Application::update()
 {
-
-
-
 	m_rasterGraphics.fill(sf::Color::Black);
+
+
+	sf::Time frameTime = mClock.getElapsedTime();
+	
+
+	
+
+
+	// Set up rotation matrices
+	Mat4x4 matRotZ, matRotX;
+	fTheta += 1.0f * (float)frameTime.asMilliseconds();
+
+	// Rotation Z
+	matRotZ.m[0][0] = cosf(fTheta);
+	matRotZ.m[0][1] = sinf(fTheta);
+	matRotZ.m[1][0] = -sinf(fTheta);
+	matRotZ.m[1][1] = cosf(fTheta);
+	matRotZ.m[2][2] = 1;
+	matRotZ.m[3][3] = 1;
+
+	// Rotation X
+	matRotX.m[0][0] = 1;
+	matRotX.m[1][1] = cosf(fTheta * 0.5f);
+	matRotX.m[1][2] = sinf(fTheta * 0.5f);
+	matRotX.m[2][1] = -sinf(fTheta * 0.5f);
+	matRotX.m[2][2] = cosf(fTheta * 0.5f);
+	matRotX.m[3][3] = 1;
+
+
+
+
 
 
 
@@ -97,13 +125,27 @@ void Application::update()
 	for (const auto tris : mMeshCube.tris)
 	{
 		// represents the new projected triangle after transformation
-		triangle triProjected, triTranslated;
+		triangle triProjected, triTranslated, triRotatedZ, triRotatedZX;
 
-		triTranslated = tris;
+		
 
-		triTranslated.p[0].z = tris.p[0].z + 3.0f;
-		triTranslated.p[1].z = tris.p[1].z + 3.0f;
-		triTranslated.p[2].z = tris.p[2].z + 3.0f;
+		// Rotate in Z-Axis
+		MultiplyMatrixVector(tris.p[0], triRotatedZ.p[0], matRotZ);
+		MultiplyMatrixVector(tris.p[1], triRotatedZ.p[1], matRotZ);
+		MultiplyMatrixVector(tris.p[2], triRotatedZ.p[2], matRotZ);
+
+		// Rotate in X-Axis
+		MultiplyMatrixVector(triRotatedZ.p[0], triRotatedZX.p[0], matRotX);
+		MultiplyMatrixVector(triRotatedZ.p[1], triRotatedZX.p[1], matRotX);
+		MultiplyMatrixVector(triRotatedZ.p[2], triRotatedZX.p[2], matRotX);
+
+
+
+		triTranslated = triRotatedZX;
+
+		triTranslated.p[0].z = tris.p[0].z + 2.0f;
+		triTranslated.p[1].z = tris.p[1].z + 2.0f;
+		triTranslated.p[2].z = tris.p[2].z + 2.0f;
 
 	
 
@@ -147,7 +189,7 @@ void Application::update()
 	}
 	
 
-
+	mClock.restart();
 
 
 }
