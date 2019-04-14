@@ -3,7 +3,10 @@
 
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 #include "../3D-Cube-Rotation/raster_graphics.h"
+#include "../3D-Cube-Rotation/global_types.h"
+
 
 
 class Application
@@ -12,8 +15,9 @@ private:
 	bool m_running = false;
 	RasterGraphics m_rasterGraphics;				  
 	sf::RenderWindow m_renderWindow;
-
-
+	Mesh mMeshCube;
+	Mat4x4 mMatProj;		// projection matrix
+	
 
 public:
 	void init(sf::Vector2u windowSize, std::string windowTitle);

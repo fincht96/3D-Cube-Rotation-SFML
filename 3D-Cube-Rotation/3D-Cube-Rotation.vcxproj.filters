@@ -32,5 +32,8 @@
     <ClInclude Include="raster_graphics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="global_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
