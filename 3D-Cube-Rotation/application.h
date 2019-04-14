@@ -17,6 +17,7 @@ private:
 	sf::RenderWindow m_renderWindow;
 	Mesh mMeshCube;
 	Mat4x4 mMatProj;		// projection matrix
+	void MultiplyMatrixVector(vec3d &i, vec3d &o, Mat4x4 &m);
 	
 
 public:
