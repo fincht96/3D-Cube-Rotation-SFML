@@ -1,8 +1,8 @@
 
 #include "application.h"
 
-#define WINDOW_WIDTH	1920
-#define WINDOW_HEIGHT	1080
+#define WINDOW_WIDTH	640
+#define WINDOW_HEIGHT	480
 #define WINDOW_TITLE "3D-Cube-Rotation"
 
 int main()

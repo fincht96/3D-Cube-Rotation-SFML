@@ -120,101 +120,25 @@ void Application::update()
 
 
 
-	///* iterates through each triangle in mesh*/
-	//for (const auto tris : mMeshCube.tris)
-	//{
-	//	// represents the new projected triangle after transformation
-	//	triangle triProjected, triTranslated, triRotatedZ, triRotatedZX;
-
-	//	
-
-	//	// Rotate in Z-Axis
-	//	MultiplyMatrixVector(tris.p[0], triRotatedZ.p[0], matRotZ);
-	//	MultiplyMatrixVector(tris.p[1], triRotatedZ.p[1], matRotZ);
-	//	MultiplyMatrixVector(tris.p[2], triRotatedZ.p[2], matRotZ);
-
-	//	// Rotate in X-Axis
-	//	MultiplyMatrixVector(triRotatedZ.p[0], triRotatedZX.p[0], matRotX);
-	//	MultiplyMatrixVector(triRotatedZ.p[1], triRotatedZX.p[1], matRotX);
-	//	MultiplyMatrixVector(triRotatedZ.p[2], triRotatedZX.p[2], matRotX);
-
-
-
-	//	triTranslated = triRotatedZX;
-
-	//	triTranslated.p[0].z = tris.p[0].z + 3.0f;
-	//	triTranslated.p[1].z = tris.p[1].z + 3.0f;
-	//	triTranslated.p[2].z = tris.p[2].z + 3.0f;
-
-	//
-
-	//	MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], mMatProj);
-	//	MultiplyMatrixVector(triTranslated.p[1], triProjected.p[1], mMatProj);
-	//	MultiplyMatrixVector(triTranslated.p[2], triProjected.p[2], mMatProj);
-
-
-	//
-
-
-
-	//	//// Scale into view
-	//	//triProjected.p[0].x += 1.0f; 
-	//	//triProjected.p[0].y += 1.0f;
-
-	//	//triProjected.p[1].x += 1.0f;
-	//	//triProjected.p[1].y += 1.0f;
-
-	//	//triProjected.p[2].x += 1.0f;
-	//	//triProjected.p[2].y += 1.0f;
-
-	//	//triProjected.p[0].x *= 0.5f * (float)m_renderWindow.getSize().x;
-	//	//triProjected.p[0].y *= 0.5f * (float)m_renderWindow.getSize().y;
-	//	//
-	//	//triProjected.p[1].x *= 0.5f * (float)m_renderWindow.getSize().x;
-	//	//triProjected.p[1].y *= 0.5f * (float)m_renderWindow.getSize().y;
-
-	//	//triProjected.p[2].x *= 0.5f * (float)m_renderWindow.getSize().x;
-	//	//triProjected.p[2].y *= 0.5f * (float)m_renderWindow.getSize().y;
-
-	//	
-
-	//	// Scale into view
-	//	triProjected.p[0].x += 1.0f; triProjected.p[0].y += 1.0f;
-	//	triProjected.p[1].x += 1.0f; triProjected.p[1].y += 1.0f;
-	//	triProjected.p[2].x += 1.0f; triProjected.p[2].y += 1.0f;
-	//	triProjected.p[0].x *= 0.5f * (float)m_renderWindow.getSize().x;
-	//	triProjected.p[0].y *= 0.5f * (float)m_renderWindow.getSize().y;
-	//	triProjected.p[1].x *= 0.5f * (float)m_renderWindow.getSize().x;
-	//	triProjected.p[1].y *= 0.5f * (float)m_renderWindow.getSize().y;
-	//	triProjected.p[2].x *= 0.5f * (float)m_renderWindow.getSize().x;
-	//	triProjected.p[2].y *= 0.5f * (float)m_renderWindow.getSize().y;
-
-
-	//	//std::cout << std::endl;
-	//	//std::cout << " x: " << triProjected.p[0].x << " y: " << triProjected.p[0].y << " z: " << triProjected.p[0].z << std::endl;
-	//	//std::cout << " x: " << triProjected.p[1].x << " y: " << triProjected.p[1].y << " z: " << triProjected.p[1].z << std::endl;
-	//	//std::cout << " x: " << triProjected.p[2].x << " y: " << triProjected.p[2].y << " z: " << triProjected.p[2].z << std::endl;
-
-
-	//	// draws new triangle to the screen
-	//	m_rasterGraphics.drawTriangle(triProjected);
-
-	//}
-		/* iterates through each triangle in mesh*/
-			// Draw Triangles
-	for (auto tri : mMeshCube.tris)
+	/* iterates through each triangle in mesh*/
+	for (const auto tris : mMeshCube.tris)
 	{
+		// represents the new projected triangle after transformation
 		triangle triProjected, triTranslated, triRotatedZ, triRotatedZX;
 
-		// Rotate in Z-Axis
-		MultiplyMatrixVector(tri.p[0], triRotatedZ.p[0], matRotZ);
-		MultiplyMatrixVector(tri.p[1], triRotatedZ.p[1], matRotZ);
-		MultiplyMatrixVector(tri.p[2], triRotatedZ.p[2], matRotZ);
+		
 
-		// Rotate in X-Axis
+		// Rotate in Z-Axis (Working)
+		MultiplyMatrixVector(tris.p[0], triRotatedZ.p[0], matRotZ);
+		MultiplyMatrixVector(tris.p[1], triRotatedZ.p[1], matRotZ);
+		MultiplyMatrixVector(tris.p[2], triRotatedZ.p[2], matRotZ);
+
+		// Rotate in X-Axis(Working)
 		MultiplyMatrixVector(triRotatedZ.p[0], triRotatedZX.p[0], matRotX);
 		MultiplyMatrixVector(triRotatedZ.p[1], triRotatedZX.p[1], matRotX);
 		MultiplyMatrixVector(triRotatedZ.p[2], triRotatedZX.p[2], matRotX);
+		
+
 
 		// Offset into the screen
 		triTranslated = triRotatedZX;
@@ -222,15 +146,21 @@ void Application::update()
 		triTranslated.p[1].z = triRotatedZX.p[1].z + 3.0f;
 		triTranslated.p[2].z = triRotatedZX.p[2].z + 3.0f;
 
+
+
 		// Project triangles from 3D --> 2D
 		MultiplyMatrixVector(triTranslated.p[0], triProjected.p[0], mMatProj);
 		MultiplyMatrixVector(triTranslated.p[1], triProjected.p[1], mMatProj);
 		MultiplyMatrixVector(triTranslated.p[2], triProjected.p[2], mMatProj);
 
+
 		// Scale into view
-		triProjected.p[0].x += 1.0f; triProjected.p[0].y += 1.0f;
-		triProjected.p[1].x += 1.0f; triProjected.p[1].y += 1.0f;
-		triProjected.p[2].x += 1.0f; triProjected.p[2].y += 1.0f;
+		triProjected.p[0].x += 1.0f; 
+		triProjected.p[0].y += 1.0f;
+		triProjected.p[1].x += 1.0f;
+		triProjected.p[1].y += 1.0f;
+		triProjected.p[2].x += 1.0f;
+		triProjected.p[2].y += 1.0f;
 		triProjected.p[0].x *= 0.5f * (float)m_renderWindow.getSize().x;
 		triProjected.p[0].y *= 0.5f * (float)m_renderWindow.getSize().y;
 		triProjected.p[1].x *= 0.5f * (float)m_renderWindow.getSize().x;
@@ -238,15 +168,14 @@ void Application::update()
 		triProjected.p[2].x *= 0.5f * (float)m_renderWindow.getSize().x;
 		triProjected.p[2].y *= 0.5f * (float)m_renderWindow.getSize().y;
 
-		// Rasterize triangle
-		m_rasterGraphics.drawLine(sf::Vector2f(triProjected.p[0].x, triProjected.p[0].y), sf::Vector2f(triProjected.p[1].x, triProjected.p[1].y));
-		m_rasterGraphics.drawLine(sf::Vector2f(triProjected.p[1].x, triProjected.p[1].y), sf::Vector2f(triProjected.p[2].x, triProjected.p[2].y));
-		m_rasterGraphics.drawLine(sf::Vector2f(triProjected.p[2].x, triProjected.p[2].y), sf::Vector2f(triProjected.p[0].x, triProjected.p[0].y));
-
+		// draws new triangle to the screen
+		m_rasterGraphics.drawTriangle(triProjected);
 		
-	
 
 	}
+
+
+
 
 	mClock.restart();
 
