@@ -4,9 +4,8 @@
 
 struct vec3d
 {
-	float x = 0;
-	float y = 0;
-	float z = 0;
+	float x, y, z;
+
 };
 
 // contains three vertices
